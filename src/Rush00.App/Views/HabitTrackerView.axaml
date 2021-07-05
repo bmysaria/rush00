@@ -9,9 +9,9 @@
         <ListBox.ItemTemplate>
             <DataTemplate DataType="models:HabitCheck">
                 <CheckBox IsChecked="{Binding IsChecked}" IsThreeState="False"
-                          Content="{Binding Date, StringFormat=\{0:dd.MM.yyyy\}}"
-                          Checked="ToggleButton_OnChecked"
-                          Unchecked="ToggleButton_OnUnchecked"/>
+                          Content="{Binding Date, StringFormat=\{0:dd.MM.yyyy\}}"/>
+                          <!-- Checked="ToggleButton_OnChecked" -->
+                          <!-- Unchecked="ToggleButton_OnUnchecked"/> -->
             </DataTemplate>
         </ListBox.ItemTemplate>
     </ListBox>

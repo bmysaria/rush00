@@ -66,7 +66,7 @@ namespace Rush00.App.ViewModels
                     .Include(x => x.HabitChecks)
                     .FirstOrDefault();
 
-                if (myHabit == null)
+                if (myHabit == null )
                 {
                     CreateHabit();
                     return;
