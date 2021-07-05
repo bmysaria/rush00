@@ -1,11 +1,17 @@
 using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace Rush00.Data.Models
 {
     public class HabitCheck
     {
-        private DateTimeOffset Date;
-        private bool IsChecked;
-
+        [Key, Required]
+        public int Id { get; set; }
+        [Required]
+        public DateTimeOffset Date { get; set; }
+        [Required]
+        public bool IsChecked { get; set; }
+        [Required]
+        public Habit Habit { get; set; }
     }
 }

@@ -1,0 +1,18 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:models="clr-namespace:Rush00.Data.Models;assembly=Rush00.Data"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="Rush00.App.Views.HabitTrackerView">
+    <ListBox Items="{Binding HabitChecks, Mode=TwoWay}">
+        <ListBox.ItemTemplate>
+            <DataTemplate DataType="models:HabitCheck">
+                <CheckBox IsChecked="{Binding IsChecked}" IsThreeState="False"
+                          Content="{Binding Date, StringFormat=\{0:dd.MM.yyyy\}}"
+                          Checked="ToggleButton_OnChecked"
+                          Unchecked="ToggleButton_OnUnchecked"/>
+            </DataTemplate>
+        </ListBox.ItemTemplate>
+    </ListBox>
+</UserControl>
