@@ -29,20 +29,18 @@ namespace Rush00.App.ViewModels
             foreach (var habitCheck in HabitChecks)
             {
                 habitCheck.WhenPropertyChanged(x => x.IsChecked, false).Subscribe(HandleHabitCheckChanged);
-            }
+            } //подписались на все модельки
         }
-        // когда в HabitTrackerViewModel мы получим событие изменения IsChecked от HabitCheckViewModel, то
-        // там провернем все это сохранение в бд,
-        // и заодно проверим, не последняя ли эта модель дала событие IsChecked. И, если да, то поставим у HabitTrackerViewModel IsFinished в true.
         private void HandleHabitCheckChanged(PropertyValue<HabitCheckViewModel, bool> obj)
         {
-           // this.HabitChecksCollectionChanged();
-            Debug.WriteLine(obj);
-        }
+            using var context = new HabitDbContext();
+            var targetModel = obj.Sender.Model;
+            targetModel.IsChecked = obj.Value;
+            context.HabitChecks.Update(targetModel);
+            context.SaveChanges();
 
-        private void HabitChecksCollectionChanged(object? sender, NotifyCollectionChangedEventArgs e)
-        {
-            throw new NotImplementedException();
+            if (this.HabitChecks.Last() == obj.Sender)
+                this.IsFinished = true;
         }
 
         public ObservableCollection<HabitCheckViewModel> HabitChecks { get; set; }

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Reactive;
 using System.Reactive.Linq;
 using System.Text;
+using DynamicData.Binding;
 using Microsoft.EntityFrameworkCore;
 using ReactiveUI;
 using Rush00.App.ViewModels;
@@ -57,14 +58,6 @@ namespace Rush00.App.ViewModels
             });
             Content = vm;
         }
-        // сделать у HabitTrackerViewModel проперти IsFinished, и слушать его изменения в MainWindowViewModel.
-        //
-        // когда в HabitTrackerViewModel мы получим событие изменения IsChecked от HabitCheckViewModel, то
-        // там провернем все это сохранение в бд,
-        // и заодно проверим, не последняя ли эта модель дала событие IsChecked. И, если да, то поставим у HabitTrackerViewModel IsFinished в true.
-        //
-        // когда в MainWindowViewModel мы получим событие изменения IsFinished, то
-        // сохраним галочку из финишт в бд, ну и поменяем модель на HabitCreateViewModel
         public void TrackHabit()
         {
             using (var context = new HabitDbContext())
@@ -79,8 +72,18 @@ namespace Rush00.App.ViewModels
                     return;
                 }
                 Title = myHabit.Title;
-                Content = new HabitTrackerViewModel(myHabit.HabitChecks.OrderBy(x => x.Date));
+                var vm = new HabitTrackerViewModel(myHabit.HabitChecks.OrderBy(x => x.Date));
+                Content = vm;
+                vm.WhenPropertyChanged(x => x.IsFinished).Subscribe(handleIsFinished);
+
             }
+        }
+
+        private void handleIsFinished(PropertyValue<HabitTrackerViewModel, bool> obj)
+        {
+            //
+            if (obj.Sender.IsFinished)
+                 CreateHabit();
         }
 
     }

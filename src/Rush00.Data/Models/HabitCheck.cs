@@ -7,6 +7,7 @@ namespace Rush00.Data.Models
     {
         [Key, Required]
         public int Id { get; set; }
+        [Required]
         public int HabitId { get; set; }
         [Required]
         public DateTimeOffset Date { get; set; }

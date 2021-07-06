@@ -8,7 +8,7 @@ namespace Rush00.Data.Models
         public DbSet<HabitCheck> HabitChecks { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlite("Filename=habits.db");
+            optionsBuilder.UseSqlite("Filename=/Users/bmysaria/Desktop/rush00/src/Rush00.App/habits.db");
         }
     }
 }

@@ -1,3 +1,5 @@
+using System;
+using System.Reactive;
 using ReactiveUI;
 using Rush00.Data.Models;
 
@@ -22,5 +24,7 @@ namespace Rush00.App.ViewModels
             IsChecked = habitCheck.IsChecked;
             Model = habitCheck;
         }
+        public ReactiveCommand<Unit, Unit> CheckCommand { get; }
+
     }
 }
