@@ -10,9 +10,9 @@ using Rush00.Data.Models;
 
 namespace Rush00.App.Views
 {
-    public partial class HabitTrackerView : UserControl
+    public partial class HabitCheckView : UserControl
     {
-        public HabitTrackerView()
+        public HabitCheckView()
         {
             InitializeComponent();
         }
@@ -21,5 +21,6 @@ namespace Rush00.App.Views
         {
             AvaloniaXamlLoader.Load(this);
         }
+
     }
 }

@@ -31,7 +31,7 @@ namespace Rush00.App.ViewModels
 
         public MainWindowViewModel()
         {
-           TrackHabit();
+            TrackHabit();
         }
         public void CreateHabit()
         {
@@ -39,10 +39,10 @@ namespace Rush00.App.ViewModels
 
             vm.StartHabit.Take(1).Subscribe(model =>
             {
-                using (var dbCtx = new HabitDbContext())
+                using (var context = new HabitDbContext())
                 {
-                    dbCtx.Habits.Add(model);
-                    dbCtx.HabitChecks.AddRange(
+                    context.Habits.Add(model);
+                    context.HabitChecks.AddRange(
                         Enumerable.Range(0, vm.Days)
                             .Select(offset => new HabitCheck
                             {
@@ -51,27 +51,33 @@ namespace Rush00.App.ViewModels
                                 IsChecked = false
                             })
                             .ToList());
-                    dbCtx.SaveChanges();
+                    context.SaveChanges();
                 }
                 TrackHabit();
             });
             Content = vm;
         }
-
+        // сделать у HabitTrackerViewModel проперти IsFinished, и слушать его изменения в MainWindowViewModel.
+        //
+        // когда в HabitTrackerViewModel мы получим событие изменения IsChecked от HabitCheckViewModel, то
+        // там провернем все это сохранение в бд,
+        // и заодно проверим, не последняя ли эта модель дала событие IsChecked. И, если да, то поставим у HabitTrackerViewModel IsFinished в true.
+        //
+        // когда в MainWindowViewModel мы получим событие изменения IsFinished, то
+        // сохраним галочку из финишт в бд, ну и поменяем модель на HabitCreateViewModel
         public void TrackHabit()
         {
             using (var context = new HabitDbContext())
             {
                 var myHabit = context.Habits
                     .Include(x => x.HabitChecks)
-                    .FirstOrDefault();
+                    .FirstOrDefault(x => !x.IsFinished);
 
                 if (myHabit == null )
                 {
                     CreateHabit();
                     return;
                 }
-
                 Title = myHabit.Title;
                 Content = new HabitTrackerViewModel(myHabit.HabitChecks.OrderBy(x => x.Date));
             }

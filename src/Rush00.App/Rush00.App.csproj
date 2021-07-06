@@ -17,4 +17,10 @@
   <ItemGroup>
     <ProjectReference Include="..\Rush00.Data\Rush00.Data.csproj" />
   </ItemGroup>
+  <ItemGroup>
+    <Compile Update="Views\HabitCheckView.axaml.cs">
+      <DependentUpon>HabitCheckView.axaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
 </Project>

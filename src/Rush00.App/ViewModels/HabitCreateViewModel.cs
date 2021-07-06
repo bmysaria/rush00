@@ -43,7 +43,6 @@ namespace Rush00.App.ViewModels
             _date = DateTimeOffset.Now.DateTime;
             _days = 0;
 
-            //Here we listen to property change notifications
             IObservable<bool>? canCreate = this.WhenAnyValue(vm => vm.Title, vm => vm.Motivation,
                     vm => vm.Date, ((s, s1, arg3) => !string.IsNullOrEmpty(_title) && !string.IsNullOrEmpty((_motivation))));
             StartHabit = ReactiveCommand.Create(
