@@ -88,7 +88,9 @@ namespace Rush00.App.ViewModels
                 habit.IsFinished = true;
                 context.Habits.Update(habit);
                 context.SaveChanges();
-                CreateHabit();
+                var vm = new CongratulationsViewModel(habit);
+                Content = vm;
+                //CreateHabit();
             }
         }
 

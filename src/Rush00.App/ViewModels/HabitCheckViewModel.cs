@@ -17,7 +17,7 @@ namespace Rush00.App.ViewModels
             }
             private set { this.RaiseAndSetIfChanged(ref _isChecked, value); }
         }
-        public HabitCheck Model { get; private set; }
+        public HabitCheck Model { get; }
 
         public HabitCheckViewModel(HabitCheck habitCheck)
         {
