@@ -29,7 +29,7 @@ namespace Rush00.App.ViewModels
             foreach (var habitCheck in HabitChecks)
             {
                 habitCheck.WhenPropertyChanged(x => x.IsChecked, false).Subscribe(HandleHabitCheckChanged);
-            } //подписались на все модельки
+            }
         }
         private void HandleHabitCheckChanged(PropertyValue<HabitCheckViewModel, bool> obj)
         {
@@ -42,7 +42,6 @@ namespace Rush00.App.ViewModels
             if (this.HabitChecks.Last() == obj.Sender)
                 this.IsFinished = true;
         }
-
         public ObservableCollection<HabitCheckViewModel> HabitChecks { get; set; }
     }
 }

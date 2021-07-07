@@ -66,7 +66,7 @@ namespace Rush00.App.ViewModels
                     .Include(x => x.HabitChecks)
                     .FirstOrDefault(x => !x.IsFinished);
 
-                if (myHabit == null )
+                    if (myHabit == null )
                 {
                     CreateHabit();
                     return;
@@ -81,9 +81,15 @@ namespace Rush00.App.ViewModels
 
         private void handleIsFinished(PropertyValue<HabitTrackerViewModel, bool> obj)
         {
-            //
             if (obj.Sender.IsFinished)
-                 CreateHabit();
+            {
+                using var context = new HabitDbContext();
+                var habit = context.Habits.FirstOrDefault(x => !x.IsFinished);
+                habit.IsFinished = true;
+                context.Habits.Update(habit);
+                context.SaveChanges();
+                CreateHabit();
+            }
         }
 
     }
