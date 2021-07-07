@@ -84,7 +84,9 @@ namespace Rush00.App.ViewModels
             if (obj.Sender.IsFinished)
             {
                 using var context = new HabitDbContext();
-                var habit = context.Habits.FirstOrDefault(x => !x.IsFinished);
+                var habit = context.Habits
+                    .Include(x => x.HabitChecks)
+                    .FirstOrDefault(x => !x.IsFinished);
                 habit.IsFinished = true;
                 context.Habits.Update(habit);
                 context.SaveChanges();

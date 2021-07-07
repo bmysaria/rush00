@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Rush00.Data.Migrations
 {
-    public partial class MyMigration : Migration
+    public partial class HabitMigrations : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -28,9 +28,9 @@ namespace Rush00.Data.Migrations
                 {
                     Id = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
+                    HabitId = table.Column<int>(type: "INTEGER", nullable: false),
                     Date = table.Column<DateTimeOffset>(type: "TEXT", nullable: false),
-                    IsChecked = table.Column<bool>(type: "INTEGER", nullable: false),
-                    HabitId = table.Column<int>(type: "INTEGER", nullable: false)
+                    IsChecked = table.Column<bool>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {

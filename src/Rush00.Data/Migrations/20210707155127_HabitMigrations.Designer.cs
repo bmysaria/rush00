@@ -9,8 +9,8 @@ using Rush00.Data.Models;
 namespace Rush00.Data.Migrations
 {
     [DbContext(typeof(HabitDbContext))]
-    [Migration("20210705162235_MyMigration")]
-    partial class MyMigration
+    [Migration("20210707155127_HabitMigrations")]
+    partial class HabitMigrations
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
