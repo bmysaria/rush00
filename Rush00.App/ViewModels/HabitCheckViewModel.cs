@@ -24,6 +24,5 @@ namespace Rush00.App.ViewModels
             IsChecked = habitCheck.IsChecked;
             Model = habitCheck;
         }
-        public ReactiveCommand<Unit, Unit> CheckCommand { get; }
     }
 }

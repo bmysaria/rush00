@@ -7,6 +7,7 @@
   <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
       <TextBlock>Congratulations!</TextBlock>
       <TextBlock Text="{Binding Count}"/>
+      <TextBlock>Finally:</TextBlock>
       <TextBlock Text="{Binding Motivation}"></TextBlock>
   </StackPanel>
 </UserControl>

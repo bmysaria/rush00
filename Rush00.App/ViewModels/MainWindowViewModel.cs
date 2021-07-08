@@ -15,7 +15,7 @@ namespace Rush00.App.ViewModels
 {
     public class MainWindowViewModel : ViewModelBase
     {
-        private string _title;
+        private string? _title;
         private ViewModelBase? _content;
 
         public string Title
@@ -56,6 +56,7 @@ namespace Rush00.App.ViewModels
                 }
                 TrackHabit();
             });
+            Title = "Set a Habit to track";
             Content = vm;
         }
         public void TrackHabit()
@@ -91,8 +92,8 @@ namespace Rush00.App.ViewModels
                 context.Habits.Update(habit);
                 context.SaveChanges();
                 var vm = new CongratulationsViewModel(habit);
+                Title = "Congratulations!";
                 Content = vm;
-                //CreateHabit();
             }
         }
 

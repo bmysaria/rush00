@@ -5,14 +5,14 @@
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="Rush00.App.Views.HabitCreateView">
     <StackPanel>
-        <TextBox Watermark="Set a habit to track:"
-                 Text="{Binding Title}" />
-        <TextBox Watermark="What would be a motivation:"
-                 Text="{Binding Motivation}" />
-        <TextBox Watermark="When will you start:"
-                 Text="{Binding Date}" />
-        <TextBox Watermark="How many days do you want to challenge yourself for:"
-                 Text="{Binding Days}" />
+        <Label Content="Set a habit to track:"/>
+        <TextBox Text="{Binding Title}"/>
+        <Label Content="What would be a motivation:"/>
+        <TextBox Text="{Binding Motivation}"/>
+        <Label Content="When will you start:"/>
+        <TextBox Text="{Binding Date}" />
+        <Label Content="How many days do you want to challenge yourself for:"/>
+        <TextBox Text="{Binding Days}" />
         <Button Content="Start habit"
                 Command="{Binding StartHabit}" />
     </StackPanel>
